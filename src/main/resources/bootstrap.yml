@@ -1,0 +1,90 @@
+elasticsearch:
+    connectTimeOut: 6000
+    connectionRequestTimeOut: 6000
+    host: 127.0.0.1
+    password: ''
+    port: 9200
+    socketTimeOut: 6000
+    username: ''
+mybatis-plus:
+    configuration:
+        cache-enabled: false
+        map-underscore-to-camel-case: true
+    global-config:
+        db-config:
+            db-type: mysql
+            field-strategy: NOT_EMPTY
+            id-type: AUTO
+            logic-delete-value: 1
+            logic-not-delete-value: 0
+    mapper-locations: classpath:/mapper/*.xml
+    typeAliasesPackage: com.zt.domain.entity
+server:
+    connection-timeout: 6000
+    port: 8080
+    tomcat:
+        accept-count: 1500
+        max-connections: 10000
+        max-threads: 2000
+        min-spare-threads: 30
+        uri-encoding: UTF-8
+tsf:
+  auth:
+    enable: true
+spring:
+    application:
+        name: EsDemo
+    cloud:
+          consul:
+            discovery:
+              instance-id: ${spring.application.name}:${server.port}
+              prefer-ip-address: true
+              health-check-interval: 10s
+              hostname: ${spring.application.name}
+              service-name: ${spring.application.name}
+              enabled: true
+            host: 127.0.0.1
+            port: 8500
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        druid:
+            connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+            filters: stat,wall
+            initial-size: 5
+            maxActive: 20
+            maxPoolPreparedStatementPerConnectionSize: 20
+            maxWait: 60000
+            min-idle: 5
+            minEvictableIdleTimeMillis: 600000
+            poolPreparedStatements: true
+            stat-view-servlet:
+                allow: 127.0.0.1,192.168.163.1
+                deny: 192.168.1.73
+                login-password: 123456
+                login-username: admin
+                reset-enable: false
+                url-pattern: /druid/*
+            testOnBorrow: false
+            testOnReturn: false
+            testWhileIdle: true
+            timeBetweenEvictionRunsMillis: 2000
+            validationQuery: SELECT 1
+            web-stat-filter:
+                enabled: true
+                exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+                url-pattern: /*
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://127.0.0.1:3306/esdemo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&autoReconnectForPools=true
+        username: root
+        password: abc123
+    jackson:
+        time-zone: GMT+8
+    redis:
+        host: 127.0.0.1
+        password:
+        pool:
+            max-active: 100
+            max-idle: 10
+            max-wait: 100000
+        port: 9013
+        timeout: 3000
