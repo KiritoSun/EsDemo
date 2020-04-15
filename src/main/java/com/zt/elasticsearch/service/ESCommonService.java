@@ -10,9 +10,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -91,12 +89,11 @@ public class ESCommonService {
 		return searchResponse;
 	}
 	
-	
     public long count(String index,String statsField,QueryBuilder queryBuilder) {
 		
 		SearchRequest searchRequest = new SearchRequest(index);
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		AggregationBuilder agg = AggregationBuilders.count("stats_field").field(statsField + ".keyword");
+		AggregationBuilder agg = AggregationBuilders.count("stats_field").field(statsField);
 		searchSourceBuilder.query(queryBuilder).aggregation(agg);
 		searchRequest.source(searchSourceBuilder);
 		SearchResponse searchResponse = null;

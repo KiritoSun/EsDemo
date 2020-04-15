@@ -86,5 +86,5 @@ spring:
             max-active: 100
             max-idle: 10
             max-wait: 100000
-        port: 9013
+        port: 6379
         timeout: 3000
