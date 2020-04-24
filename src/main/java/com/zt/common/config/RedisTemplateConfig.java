@@ -1,4 +1,4 @@
-package com.zt.config;
+package com.zt.common.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -38,7 +38,7 @@ public class RedisTemplateConfig {
         RedisSerializer stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);
-        redisTemplate.setHashValueSerializer(stringSerializer);
+//        redisTemplate.setHashValueSerializer(stringSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

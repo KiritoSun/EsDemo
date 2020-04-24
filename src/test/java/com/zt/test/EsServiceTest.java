@@ -1,8 +1,10 @@
 package com.zt.test;
 
 import com.alibaba.fastjson.JSON;
+import com.zt.common.context.EsContext;
 import com.zt.domain.entity.Movie;
 import com.zt.elasticsearch.service.ESCommonService;
+import com.zt.service.EsService;
 import com.zt.util.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.Lists;
@@ -27,6 +29,8 @@ import java.util.Map;
 public class EsServiceTest {
     @Autowired
     private ESCommonService esCommonService;
+    @Autowired
+    private EsContext context;
 
     @Test
     public void fun() {
@@ -71,5 +75,18 @@ public class EsServiceTest {
         QueryBuilder queryBuilder = QueryBuilders.boolQuery();
         String index = "";
         log.info("count：{}", esCommonService.count(index, "name", queryBuilder));
+    }
+
+    @Test
+    public void fun4() {
+        Movie movie = new Movie();
+        movie.setName("a1");
+        movie.setAge("18");
+        movie.setSex("man");
+
+        EsService service = context.get("ES2");
+        if (service != null) {
+            service.save(movie);
+        }
     }
 }
